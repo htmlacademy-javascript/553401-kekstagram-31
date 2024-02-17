@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Алексей Здоровенко](https://up.htmlacademy.ru/javascript/31/user/553401).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Беллавин](https://htmlacademy.ru/profile/bellavin).
 
 ---
 
