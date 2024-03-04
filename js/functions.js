@@ -1,5 +1,3 @@
-const MAX_LENGTH = 4;
-
 // Функция для проверки длины строки
 const isStringLength = (string, length) => string.length <= length;
 
@@ -31,10 +29,10 @@ const getNumber = (string) => {
   return parseInt(number, 10);
 };
 
-// console.log(isStringLength('Топор', MAX_LENGTH));
+// console.log(isStringLength('Топор', 4));
 // console.log(isPalindrome('Лёша на полке клопа нашёл '));
 // console.log(getNumber('ECMAScript 2020'));
 
-isStringLength('Топор', MAX_LENGTH);
+isStringLength('Топор', 4);
 isPalindrome('Лёша на полке клопа нашёл ');
 getNumber('ECMAScript 2020');
