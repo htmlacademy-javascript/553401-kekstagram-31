@@ -76,26 +76,18 @@ const createCommentForCard = () => ({
   name: getRandomArrayElement(NAMES),
 });
 
-const getObjectsArray = (arrayLength, constructor) => {
-  const array = [];
-
-  for (let i = 0; i < arrayLength; i++) {
-    const object = constructor();
-    array.push(object);
-  }
-
-  return array;
-};
-
 const createPhotoDescription = () => ({
   id: generatePhotoId(),
   url: `photos/${generateUrlId()}.jpg`,
   description: getRandomArrayElement(DESCRIPTIONS),
   likes: getRandomInteger(AMOUNT_LIKES_MIN, AMOUNT_LIKES_MAX),
-  comments: getObjectsArray(
-    getRandomInteger(0, AMOUNT_COMMENTS_MAX),
+  comments: Array.from(
+    { length: getRandomInteger(0, AMOUNT_COMMENTS_MAX) },
     createCommentForCard
   ),
 });
 
-getObjectsArray(AMOUNT_PHOTOCARDS, createPhotoDescription);
+const createPhotoDescriptionArray = () =>
+  Array.from({ length: AMOUNT_PHOTOCARDS }, createPhotoDescription);
+
+createPhotoDescriptionArray();
