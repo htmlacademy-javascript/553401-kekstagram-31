@@ -67,4 +67,4 @@ const createPhotoDescription = () => ({
 const createPhotoDescriptions = () =>
   Array.from({ length: AMOUNT_PHOTOCARDS }, createPhotoDescription);
 
-export { createPhotoDescriptions };
+export default createPhotoDescriptions;
