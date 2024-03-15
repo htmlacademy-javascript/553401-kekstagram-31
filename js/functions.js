@@ -1,8 +1,8 @@
 const timeToDate = (time) => {
-  const timeArr = time.split(':');
+  const [hours, minutes] = time.split(':');
   const date = new Date();
-  date.setHours(Number(timeArr[0]));
-  date.setMinutes(Number(timeArr[1]));
+  date.setHours(Number(hours));
+  date.setMinutes(Number(minutes));
 
   return date;
 };
@@ -10,7 +10,8 @@ const timeToDate = (time) => {
 const isMeetingPossible = (startTime, endTime, meetingStartTime, duration) => {
   const getEndMeetingDate = () => {
     const date = timeToDate(meetingStartTime);
-    date.setMinutes(date.getMinutes() + duration);
+    const meetingStartMinutes = date.getMinutes();
+    date.setMinutes(meetingStartMinutes + duration);
 
     return date;
   };
