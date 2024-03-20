@@ -64,7 +64,7 @@ const createPhotoDescription = () => ({
   ),
 });
 
-const createPhotoDescriptions = () =>
-  Array.from({ length: AMOUNT_PHOTOCARDS }, createPhotoDescription);
+const createPhotoDescriptions = (amount) =>
+  Array.from({ length: amount }, createPhotoDescription);
 
-export default createPhotoDescriptions;
+export { AMOUNT_PHOTOCARDS, createPhotoDescriptions };
