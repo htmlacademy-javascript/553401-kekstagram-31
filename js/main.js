@@ -1,3 +1,3 @@
-import createPhotoDescriptions from './data.js';
+import renderMiniatures from './miniatures.js';
 
-createPhotoDescriptions();
+renderMiniatures();
