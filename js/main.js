@@ -1,4 +1,11 @@
 import createPhotoDescriptions from './data.js';
-import renderMiniatures from './miniatures.js';
+import renderMiniatures from './render-miniatures.js';
+import './render-full-picture.js';
 
-renderMiniatures(createPhotoDescriptions());
+const photoArray = createPhotoDescriptions();
+
+renderMiniatures(photoArray);
+
+////////////////////////////////////
+
+////////////////////////////////////
