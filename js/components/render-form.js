@@ -1,5 +1,9 @@
 import { isEscapeKey } from '../util.js';
-import { changeSize, resetScale } from './upload-image-effects.js';
+import {
+  changeSize,
+  onEffectChange,
+  resetUploadForm,
+} from './upload-image-effects.js';
 import validateForm from './validate-form';
 
 const body = document.body;
@@ -7,6 +11,7 @@ const form = document.querySelector('.img-upload__form');
 const uploadOverlay = form.querySelector('.img-upload__overlay');
 const uploadOverlayCloseBtn = form.querySelector('.img-upload__cancel');
 const scaleBlock = document.querySelector('.scale');
+const effectList = form.querySelector('.effects');
 
 const onDocumentKeydown = (evt) => {
   if (
@@ -33,6 +38,7 @@ function openUploadImg() {
   uploadOverlayCloseBtn.addEventListener('click', closeUploadImg);
   form.addEventListener('submit', validateForm);
   scaleBlock.addEventListener('click', changeSize);
+  effectList.addEventListener('change', onEffectChange);
 }
 
 function closeUploadImg() {
@@ -44,7 +50,7 @@ function closeUploadImg() {
   form.reset();
   form.removeEventListener('submit', validateForm);
   scaleBlock.removeEventListener('click', changeSize);
-  resetScale();
+  resetUploadForm();
 }
 
 export default openUploadImg;

@@ -60,8 +60,9 @@ pristine.addValidator(
 );
 
 const validateForm = (evt) => {
-  evt.preventDefault();
-  pristine.validate();
+  if (!pristine.validate()) {
+    evt.preventDefault();
+  }
 };
 
 export default validateForm;
