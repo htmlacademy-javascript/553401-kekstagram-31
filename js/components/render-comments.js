@@ -1,7 +1,6 @@
 const AMOUNT_COMMENTS_SHOWN = 5;
 
 const commentList = document.querySelector('.social__comments');
-const commentLoadBtn = document.querySelector('.comments-loader');
 const commentCount = document.querySelector('.social__comment-shown-count');
 const commentListFragment = document.createDocumentFragment();
 const template = commentList.children[0].cloneNode(true);
@@ -17,6 +16,7 @@ const createComment = (item) => {
 };
 
 const renderComments = (commentArray) => {
+  const commentLoadBtn = document.querySelector('.comments-loader');
   let counter = 0;
 
   const shownComment = () => {
