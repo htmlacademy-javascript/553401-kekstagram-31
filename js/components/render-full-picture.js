@@ -41,6 +41,8 @@ function openBigPicture(item) {
 function closeBigPicture() {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
+  const button = bigPicture.querySelector('.comments-loader');
+  button.replaceWith(button.cloneNode(true));
   document.removeEventListener('keydown', onDocumentKeydown);
   bigPicture.removeEventListener('click', onOverlayClick);
   bigPictureCloseBtn.removeEventListener('click', closeBigPicture);

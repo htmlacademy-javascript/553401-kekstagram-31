@@ -28,3 +28,5 @@ export const createRandomIdFromRangeGenerator = (min, max) => {
 };
 
 export const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export const hasDuplicate = (array) => new Set(array).size !== array.length;
