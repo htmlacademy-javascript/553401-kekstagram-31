@@ -7,6 +7,7 @@ import {
 import validateForm from './validate-form';
 
 const body = document.body;
+const uploadInput = document.querySelector('.img-upload__input');
 const form = document.querySelector('.img-upload__form');
 const uploadOverlay = form.querySelector('.img-upload__overlay');
 const uploadOverlayCloseBtn = form.querySelector('.img-upload__cancel');
@@ -52,5 +53,8 @@ function closeUploadImg() {
   scaleBlock.removeEventListener('click', changeSize);
   resetUploadForm();
 }
+const renderUploadForm = () => {
+  uploadInput.addEventListener('change', openUploadImg);
+};
 
-export default openUploadImg;
+export default renderUploadForm;
