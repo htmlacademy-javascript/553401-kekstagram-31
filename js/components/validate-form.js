@@ -1,4 +1,5 @@
-import { hasDuplicate } from '../util.js';
+import { hasDuplicate, isEscapeKey } from '../util.js';
+import { sendData } from './api.js';
 
 const AMOUNT_HASHTAGS = 5;
 const AMOUNT_COMMENT_SYMBOLS = 140;
@@ -6,7 +7,55 @@ const AMOUNT_COMMENT_SYMBOLS = 140;
 const form = document.querySelector('.img-upload__form');
 const inputHashtags = form.querySelector('.text__hashtags');
 const inputText = form.querySelector('.text__description');
+const submitButton = form.querySelector('.img-upload__submit');
+const successTemplate = document
+  .querySelector('#success')
+  .content.querySelector('.success');
+const errorTemplate = document
+  .querySelector('#error')
+  .content.querySelector('.error');
 const hashtagRegexp = /^#[a-zа-яё0-9]{1,19}$/i;
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Отправляю...',
+};
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const renderMessage = (typeError, template) => {
+  const messageFragment = document.createDocumentFragment();
+  const message = template.cloneNode(true);
+  const button = message.querySelector(`.${typeError}__button`);
+
+  function onPopupEscKeydown(evt) {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+      closeMessage();
+    }
+  }
+
+  function closeMessage() {
+    message.remove();
+    document.removeEventListener('keydown', onPopupEscKeydown);
+  }
+  message.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains(typeError)) {
+      closeMessage();
+    }
+  });
+  button.addEventListener('click', closeMessage);
+  document.addEventListener('keydown', onPopupEscKeydown);
+  messageFragment.append(message);
+  document.body.append(messageFragment);
+};
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -29,7 +78,7 @@ const validateHashtagsRe = (value) => {
   return true;
 };
 
-const validateHashtagsDublicate = (value) =>
+const validateHashtagsDuplicate = (value) =>
   !hasDuplicate(getArrayOfHashtags(value));
 const validateHashtagsLength = (value) =>
   getArrayOfHashtags(value).length <= AMOUNT_HASHTAGS;
@@ -43,7 +92,7 @@ pristine.addValidator(
 
 pristine.addValidator(
   inputHashtags,
-  validateHashtagsDublicate,
+  validateHashtagsDuplicate,
   'Хештеги не должны повторяться'
 );
 
@@ -59,10 +108,23 @@ pristine.addValidator(
   `До ${AMOUNT_COMMENT_SYMBOLS} символов`
 );
 
-const validateForm = (evt) => {
-  if (!pristine.validate()) {
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
     evt.preventDefault();
-  }
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(onSuccess)
+        .then(() => {
+          renderMessage('success', successTemplate);
+        })
+        .catch(() => {
+          renderMessage('error', errorTemplate);
+        })
+        .finally(unblockSubmitButton);
+    }
+  });
 };
 
-export default validateForm;
+export default setUserFormSubmit;

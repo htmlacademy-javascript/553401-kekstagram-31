@@ -1,3 +1,5 @@
+const ALERT_SHOW_TIME = 5000;
+
 export const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -30,3 +32,13 @@ export const createRandomIdFromRangeGenerator = (min, max) => {
 export const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export const hasDuplicate = (array) => new Set(array).size !== array.length;
+
+export const showAlert = (template) => {
+  const alertContainer = template.cloneNode(true);
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
