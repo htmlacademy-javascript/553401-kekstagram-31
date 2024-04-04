@@ -5,9 +5,6 @@ const AMOUNT_RANDOM_PHOTOCARDS = 10;
 const filterBlock = document.querySelector('.img-filters');
 const activeBtnClass = 'img-filters__button--active';
 
-const compareQuantityComments = (imgA, imgB) =>
-  imgB.comments.length - imgA.comments.length;
-
 const setActiveFilterClick = (cb) => {
   filterBlock.classList.remove('img-filters--inactive');
   filterBlock.addEventListener('click', (evt) => {
@@ -26,6 +23,9 @@ const setActiveFilterClick = (cb) => {
 const getFilteredArray = (array) => {
   const activeFilterBtn = document.querySelector(`.${activeBtnClass}`);
   const arrayDefault = array.slice();
+
+  const compareQuantityComments = (imgA, imgB) =>
+    imgB.comments.length - imgA.comments.length;
 
   switch (activeFilterBtn.id) {
     case 'filter-default':
