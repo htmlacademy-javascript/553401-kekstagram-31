@@ -3,7 +3,7 @@ import {
   errorDataTemplate,
 } from './components/render-miniatures.js';
 import { showAlert } from './util.js';
-import { getData } from './components/api.js';
+import { getData } from './data/api.js';
 import closeUploadImg from './components/render-form.js';
 import setUserFormSubmit from './components/validate-form.js';
 

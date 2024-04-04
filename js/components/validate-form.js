@@ -1,9 +1,10 @@
 import { hasDuplicate, isEscapeKey } from '../util.js';
-import { sendData } from './api.js';
+import { sendData } from '../data/api.js';
 
 const AMOUNT_HASHTAGS = 5;
 const AMOUNT_COMMENT_SYMBOLS = 140;
 
+const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
 const inputHashtags = form.querySelector('.text__hashtags');
 const inputText = form.querySelector('.text__description');
@@ -37,6 +38,7 @@ const renderMessage = (typeError, template) => {
 
   function onPopupEscKeydown(evt) {
     if (isEscapeKey(evt)) {
+      evt.stopPropagation();
       evt.preventDefault();
       closeMessage();
     }
@@ -44,7 +46,7 @@ const renderMessage = (typeError, template) => {
 
   function closeMessage() {
     message.remove();
-    document.removeEventListener('keydown', onPopupEscKeydown);
+    body.removeEventListener('keydown', onPopupEscKeydown);
   }
   message.addEventListener('click', (evt) => {
     if (evt.target.classList.contains(typeError)) {
@@ -52,9 +54,9 @@ const renderMessage = (typeError, template) => {
     }
   });
   button.addEventListener('click', closeMessage);
-  document.addEventListener('keydown', onPopupEscKeydown);
+  body.addEventListener('keydown', onPopupEscKeydown);
   messageFragment.append(message);
-  document.body.append(messageFragment);
+  body.append(messageFragment);
 };
 
 const pristine = new Pristine(form, {
