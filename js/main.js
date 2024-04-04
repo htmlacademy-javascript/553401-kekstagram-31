@@ -1,11 +1,18 @@
-import createPhotoDescriptions from './data.js';
-import renderMiniatures from './components/render-miniatures.js';
-import renderUploadForm from './components/render-form.js';
+import {
+  renderMiniatures,
+  errorDataTemplate,
+} from './components/render-miniatures.js';
+import { showAlert } from './util.js';
+import { getData } from './data/api.js';
+import closeUploadImg from './components/render-form.js';
+import setUserFormSubmit from './components/validate-form.js';
 
-const photoArray = createPhotoDescriptions();
+getData()
+  .then((photos) => {
+    renderMiniatures(photos);
+  })
+  .catch(() => {
+    showAlert(errorDataTemplate);
+  });
 
-renderMiniatures(photoArray);
-renderUploadForm();
-////////////////////////////////////////////
-
-////////////////////////////////////////////
+setUserFormSubmit(closeUploadImg);

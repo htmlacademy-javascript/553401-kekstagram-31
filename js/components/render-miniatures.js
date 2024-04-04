@@ -4,6 +4,9 @@ const pictureList = document.querySelector('.pictures');
 const templatePicture = document
   .querySelector('#picture')
   .content.querySelector('.picture');
+const errorDataTemplate = document
+  .querySelector('#data-error')
+  .content.querySelector('.data-error');
 
 const pictureListFragment = document.createDocumentFragment();
 
@@ -35,4 +38,4 @@ const renderMiniatures = (array) => {
   });
 };
 
-export default renderMiniatures;
+export { renderMiniatures, errorDataTemplate };

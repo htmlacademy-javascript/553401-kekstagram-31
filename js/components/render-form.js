@@ -4,7 +4,6 @@ import {
   onEffectChange,
   resetUploadForm,
 } from './upload-image-effects.js';
-import validateForm from './validate-form';
 
 const body = document.body;
 const uploadInput = document.querySelector('.img-upload__input');
@@ -37,7 +36,6 @@ function openUploadImg() {
   document.addEventListener('keydown', onDocumentKeydown);
   uploadOverlay.addEventListener('click', onOverlayClick);
   uploadOverlayCloseBtn.addEventListener('click', closeUploadImg);
-  form.addEventListener('submit', validateForm);
   scaleBlock.addEventListener('click', changeSize);
   effectList.addEventListener('change', onEffectChange);
 }
@@ -49,12 +47,10 @@ function closeUploadImg() {
   uploadOverlay.removeEventListener('click', onOverlayClick);
   uploadOverlayCloseBtn.removeEventListener('click', closeUploadImg);
   form.reset();
-  form.removeEventListener('submit', validateForm);
   scaleBlock.removeEventListener('click', changeSize);
   resetUploadForm();
 }
-const renderUploadForm = () => {
-  uploadInput.addEventListener('change', openUploadImg);
-};
 
-export default renderUploadForm;
+uploadInput.addEventListener('change', openUploadImg);
+
+export default closeUploadImg;
