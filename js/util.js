@@ -42,3 +42,23 @@ export const showAlert = (template) => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
+
+export const getShuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = getRandomInteger(0, i + 1);
+    const swap = array[i];
+    array[i] = array[j];
+    array[j] = swap;
+  }
+
+  return array;
+};
+
+export const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
