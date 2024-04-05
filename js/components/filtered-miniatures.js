@@ -10,13 +10,11 @@ const setActiveFilterClick = (cb) => {
   filterBlock.classList.remove('img-filters--inactive');
   filterForm.addEventListener('click', (evt) => {
     if (evt.target.closest('.img-filters__button')) {
+      cb();
       if (!evt.target.classList.contains(activeBtnClass)) {
         const activeFilterBtn = document.querySelector(`.${activeBtnClass}`);
         activeFilterBtn.classList.remove(activeBtnClass);
         evt.target.classList.add(activeBtnClass);
-        cb();
-      } else if (evt.target.id === 'filter-random') {
-        cb();
       }
     }
   });

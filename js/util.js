@@ -54,7 +54,7 @@ export const getShuffleArray = (array) => {
   return array;
 };
 
-export const debounce = (callback, timeoutDelay = 500) => {
+export const debounce = (callback, timeoutDelay = 600) => {
   let timeoutId;
 
   return (...rest) => {
