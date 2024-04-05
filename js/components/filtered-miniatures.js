@@ -3,19 +3,21 @@ import { getShuffleArray } from '../util.js';
 const AMOUNT_RANDOM_PHOTOCARDS = 10;
 
 const filterBlock = document.querySelector('.img-filters');
+const filterForm = filterBlock.querySelector('.img-filters__form');
 const activeBtnClass = 'img-filters__button--active';
 
 const setActiveFilterClick = (cb) => {
   filterBlock.classList.remove('img-filters--inactive');
-  filterBlock.addEventListener('click', (evt) => {
-    if (
-      evt.target.nodeName === 'BUTTON' &&
-      !evt.target.classList.contains(activeBtnClass)
-    ) {
-      const activeFilterBtn = document.querySelector(`.${activeBtnClass}`);
-      activeFilterBtn.classList.remove(activeBtnClass);
-      evt.target.classList.add(activeBtnClass);
-      cb();
+  filterForm.addEventListener('click', (evt) => {
+    if (evt.target.closest('.img-filters__button')) {
+      if (!evt.target.classList.contains(activeBtnClass)) {
+        const activeFilterBtn = document.querySelector(`.${activeBtnClass}`);
+        activeFilterBtn.classList.remove(activeBtnClass);
+        evt.target.classList.add(activeBtnClass);
+        cb();
+      } else if (evt.target.id === 'filter-random') {
+        cb();
+      }
     }
   });
 };

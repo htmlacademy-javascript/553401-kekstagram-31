@@ -65,7 +65,8 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__field-wrapper--error',
 });
 
-const getArrayOfHashtags = (value) => value.split(' ');
+const getArrayOfHashtags = (value) =>
+  value.split(' ').filter((tag) => tag.trim());
 
 const validateHashtagsRe = (value) => {
   if (value.length === 0) {
@@ -81,7 +82,7 @@ const validateHashtagsRe = (value) => {
 };
 
 const validateHashtagsDuplicate = (value) =>
-  !hasDuplicate(getArrayOfHashtags(value));
+  !hasDuplicate(getArrayOfHashtags(value.toLowerCase()));
 const validateHashtagsLength = (value) =>
   getArrayOfHashtags(value).length <= AMOUNT_HASHTAGS;
 const validateComment = (value) => value.length <= AMOUNT_COMMENT_SYMBOLS;

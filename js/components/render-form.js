@@ -11,6 +11,7 @@ const body = document.body;
 const uploadInput = document.querySelector('.img-upload__input');
 const form = document.querySelector('.img-upload__form');
 const preview = form.querySelector('.img-upload__preview img');
+const effectsPreview = form.querySelectorAll('.effects__preview');
 const uploadOverlay = form.querySelector('.img-upload__overlay');
 const uploadOverlayCloseBtn = form.querySelector('.img-upload__cancel');
 const scaleBlock = document.querySelector('.scale');
@@ -39,6 +40,9 @@ function openUploadImg() {
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
   if (matches) {
     preview.src = URL.createObjectURL(file);
+    effectsPreview.forEach((item) => {
+      item.style.backgroundImage = `url(${URL.createObjectURL(file)})`;
+    });
   }
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
