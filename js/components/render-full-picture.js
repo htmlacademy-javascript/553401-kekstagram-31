@@ -34,7 +34,7 @@ function openBigPicture(item) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-  bigPicture.addEventListener('click', onOverlayClick);
+  bigPicture.addEventListener('mousedown', onOverlayClick);
   bigPictureCloseBtn.addEventListener('click', closeBigPicture);
 }
 
@@ -44,7 +44,7 @@ function closeBigPicture() {
   const button = bigPicture.querySelector('.comments-loader');
   button.replaceWith(button.cloneNode(true));
   document.removeEventListener('keydown', onDocumentKeydown);
-  bigPicture.removeEventListener('click', onOverlayClick);
+  bigPicture.removeEventListener('mousedown', onOverlayClick);
   bigPictureCloseBtn.removeEventListener('click', closeBigPicture);
 }
 
