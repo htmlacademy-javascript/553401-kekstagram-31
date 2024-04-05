@@ -1,4 +1,5 @@
 import openBigPicture from './render-full-picture.js';
+import { getFilteredArray } from './filtered-miniatures.js';
 
 const pictureList = document.querySelector('.pictures');
 const templatePicture = document
@@ -11,17 +12,23 @@ const errorDataTemplate = document
 const pictureListFragment = document.createDocumentFragment();
 
 const renderMiniatures = (array) => {
-  array.forEach(({ id, url, description, likes, comments }) => {
-    const miniatureItem = templatePicture.cloneNode(true);
-    miniatureItem.dataset.photoId = id;
-    miniatureItem.querySelector('.picture__img').src = url;
-    miniatureItem.querySelector('.picture__img').alt = description;
-    miniatureItem.querySelector('.picture__likes').textContent = likes;
-    miniatureItem.querySelector('.picture__comments').textContent =
-      comments.length;
+  getFilteredArray(array).forEach(
+    ({ id, url, description, likes, comments }) => {
+      const miniatureItem = templatePicture.cloneNode(true);
+      miniatureItem.dataset.photoId = id;
+      miniatureItem.querySelector('.picture__img').src = url;
+      miniatureItem.querySelector('.picture__img').alt = description;
+      miniatureItem.querySelector('.picture__likes').textContent = likes;
+      miniatureItem.querySelector('.picture__comments').textContent =
+        comments.length;
 
-    pictureListFragment.append(miniatureItem);
-  });
+      pictureListFragment.append(miniatureItem);
+    }
+  );
+
+  while (pictureList.querySelector('.picture')) {
+    pictureList.removeChild(pictureList.querySelector('.picture'));
+  }
 
   pictureList.append(pictureListFragment);
 
