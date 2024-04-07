@@ -5,7 +5,7 @@ import {
 import { showAlert, debounce } from './util.js';
 import { getData } from './data/api.js';
 import { setActiveFilterClick } from './components/filtered-miniatures.js';
-import closeUploadImg from './components/render-form.js';
+import onUploadCloseBtnClick from './components/render-form.js';
 import { setUserFormSubmit } from './components/validate-form.js';
 
 getData()
@@ -17,4 +17,4 @@ getData()
     showAlert(errorDataTemplate);
   });
 
-setUserFormSubmit(closeUploadImg);
+setUserFormSubmit(onUploadCloseBtnClick);

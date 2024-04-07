@@ -18,14 +18,14 @@ const renderBigPicture = ({ url, description, likes, comments }) => {
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeBigPicture();
+    onBigPictureCloseBtnClick();
   }
 };
 
 const onOverlayClick = (evt) => {
   if (evt.target.classList.contains('overlay')) {
     evt.preventDefault();
-    closeBigPicture();
+    onBigPictureCloseBtnClick();
   }
 };
 
@@ -35,17 +35,17 @@ function openBigPicture(item) {
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
   bigPicture.addEventListener('mousedown', onOverlayClick);
-  bigPictureCloseBtn.addEventListener('click', closeBigPicture);
+  bigPictureCloseBtn.addEventListener('click', onBigPictureCloseBtnClick);
 }
 
-function closeBigPicture() {
+function onBigPictureCloseBtnClick() {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
   const button = bigPicture.querySelector('.comments-loader');
   button.replaceWith(button.cloneNode(true));
   document.removeEventListener('keydown', onDocumentKeydown);
   bigPicture.removeEventListener('mousedown', onOverlayClick);
-  bigPictureCloseBtn.removeEventListener('click', closeBigPicture);
+  bigPictureCloseBtn.removeEventListener('click', onBigPictureCloseBtnClick);
 }
 
 export default openBigPicture;

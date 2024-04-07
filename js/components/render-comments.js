@@ -19,7 +19,7 @@ const renderComments = (commentArray) => {
   const commentLoadBtn = document.querySelector('.comments-loader');
   let counter = 0;
 
-  const shownComment = () => {
+  const onCommentLoadBtnClick = () => {
     const startIndex = counter * AMOUNT_COMMENTS_SHOWN;
     const endIndex =
       startIndex + AMOUNT_COMMENTS_SHOWN > commentArray.length
@@ -37,9 +37,9 @@ const renderComments = (commentArray) => {
   };
 
   commentList.innerHTML = '';
-  shownComment();
+  onCommentLoadBtnClick();
 
-  commentLoadBtn.addEventListener('click', shownComment);
+  commentLoadBtn.addEventListener('click', onCommentLoadBtnClick);
 };
 
 export default renderComments;

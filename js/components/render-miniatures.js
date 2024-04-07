@@ -26,10 +26,7 @@ const renderMiniatures = (array) => {
     }
   );
 
-  while (pictureList.querySelector('.picture')) {
-    pictureList.removeChild(pictureList.querySelector('.picture'));
-  }
-
+  pictureList.querySelectorAll('.picture').forEach((node) => node.remove());
   pictureList.append(pictureListFragment);
 
   pictureList.addEventListener('click', (evt) => {
