@@ -34,26 +34,26 @@ const unblockSubmitButton = () => {
 const renderMessage = (typeError, template) => {
   const messageFragment = document.createDocumentFragment();
   const message = template.cloneNode(true);
-  const button = message.querySelector(`.${typeError}__button`);
+  const messageButton = message.querySelector(`.${typeError}__button`);
 
   function onPopupEscKeydown(evt) {
     if (isEscapeKey(evt)) {
       evt.stopPropagation();
       evt.preventDefault();
-      closeMessage();
+      onMessageButtonClick();
     }
   }
 
-  function closeMessage() {
+  function onMessageButtonClick() {
     message.remove();
     body.removeEventListener('keydown', onPopupEscKeydown);
   }
   message.addEventListener('click', (evt) => {
     if (evt.target.classList.contains(typeError)) {
-      closeMessage();
+      onMessageButtonClick();
     }
   });
-  button.addEventListener('click', closeMessage);
+  messageButton.addEventListener('click', onMessageButtonClick);
   body.addEventListener('keydown', onPopupEscKeydown);
   messageFragment.append(message);
   body.append(messageFragment);
@@ -68,18 +68,8 @@ const pristine = new Pristine(form, {
 const getArrayOfHashtags = (value) =>
   value.split(' ').filter((tag) => tag.trim());
 
-const validateHashtagsRe = (value) => {
-  if (value.length === 0) {
-    return true;
-  }
-  const arrayOfHashtags = getArrayOfHashtags(value);
-  for (let i = 0; i < arrayOfHashtags.length; i++) {
-    if (!hashtagRegexp.test(arrayOfHashtags[i])) {
-      return false;
-    }
-  }
-  return true;
-};
+const validateHashtagsRe = (value) =>
+  getArrayOfHashtags(value).every((tag) => hashtagRegexp.test(tag));
 
 const validateHashtagsDuplicate = (value) =>
   !hasDuplicate(getArrayOfHashtags(value.toLowerCase()));
